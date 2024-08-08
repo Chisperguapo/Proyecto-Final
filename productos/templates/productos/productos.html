@@ -1,0 +1,198 @@
+{% extends 'nav_foot.html' %}
+
+{% load static %}
+
+{% block title %}Productos{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+
+<style>
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.card1 {
+    width: 120px; 
+    margin: 10px; 
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 45px;
+    padding: 10px;
+
+}
+
+.card1 img{
+    max-width: 70%;
+    height: none;
+    border: none;
+    display: block;
+    margin: 0 auto; 
+}
+
+.card-title1 {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas en pantallas grandes */
+    gap: 20px; /* Espacio entre las tarjetas */
+    max-width: 1000px; /* Ajusta según tus necesidades */
+    margin: 0 auto; /* Centra la cuadrícula */
+}
+
+@media (max-width: 1200px) {
+    .grid-container {
+        grid-template-columns: repeat(4, 1fr); /* 4 columnas en pantallas más pequeñas */
+    }
+}
+
+.card-link {
+    text-decoration: none;
+    color: black;
+}
+.card-link :hover {
+    color: #3e277e;
+}
+
+.card1 {
+    border: 1px solid #ddd; /* Estilo de borde */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que la imagen no se desborde */
+    display: flex;
+    flex-direction: column;
+    height: 170px; /* Altura fija para todas las tarjetas */
+    width: 170px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 60%; /* Ajusta la altura de la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+}
+
+.card-body {
+    padding: 10px;
+    text-align: center;
+    flex: 1; /* Hace que el contenido del cuerpo se expanda para llenar el espacio restante */
+}
+
+.card-title1 {
+    margin: 0;
+    font-size: 1.2em; /* Ajusta el tamaño del texto según tus necesidades */
+}
+
+
+</style>
+
+<!-- Search form -->
+<form method="GET" action="">
+    <div class="input-group mb-4">
+        <input type="text" class="form-control" placeholder="Buscar productos" name="query" value="{{ query }}">
+        <button class="btn btn-outline-dark" type="submit">Buscar</button>
+    </div>
+</form>
+<h1 style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;">Categorías</h1>
+<br>
+<div style="margin-left: 40px; margin-right: 40px; display: flex; flex-direction: column; align-items: center;">
+    <div class="carousel">
+        {% if categorias %}
+            <div class="grid-container">
+                {% for catego in categorias %}
+                    <a href="?query={{ catego.categoria }}" class="card-link">
+                        <article class="card1">
+                            <img src="{{ catego.imagen.url }}" class="card-img-top" alt="{{ catego.categoria }}">
+                            <div class="card-body">
+                                <h4 class="card-title1">{{ catego.categoria|title }}</h4>
+                            </div>
+                        </article>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No hay categorías disponibles.</p>
+        {% endif %}
+    </div>
+</div>
+
+
+<h1 style="text-align: center; font-family: Georgia, 'Times New Roman', Times, serif;">Productos en promoción y/o descuentos</h1>
+<br><br>
+
+<section>
+    <style>
+        .card {
+            max-width: 210.5px; /* Ancho máximo ajustado */
+            margin-bottom: 20px; /* Espacio entre tarjetas */
+            max-height: 305px; /* Altura mínima ajustada */
+        }
+         .card-img-top1 {
+            max-height: 140px; /* Altura máxima de la imagen reducida */
+            object-fit: cover; /* Ajuste de la imagen para cubrir el contenedor */
+        }
+        .card-body1 {
+            padding: 10px; /* Espaciado interno reducido */
+        }
+    </style>
+
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+        {% for producto in productos %}
+            <div class="col mb-4">
+                <div class="card h-100">
+                    <!-- Imagen del producto -->
+                    {% if producto.imagen %}
+                        <img class="card-img-top1" src="{{producto.imagen.url}}" alt="Imagen del producto" style="margin: auto;" />
+                    {% else %}
+                        <img class="card-img-top" src="{% static 'productos/default.jpeg' %}" alt="Imagen por defecto" />
+                    {% endif %}
+                    <!-- Detalles del producto -->
+                    <div class="card-body1">
+                        <div class="text-center">
+                            <!-- Nombre del producto -->
+                            <h6 class="fw-bolder" style="font-size: 16px;">{{producto.nombre}}</h6>
+                            <h6 class="fw-bolder" style="font-size: 14px;">{{producto.marca}}</h6>
+                            <h5 class="nombre" style="font-size: 15px; font-weight: 600;">{{producto.categoria}}</h5>
+                            <!-- Precio del producto -->
+                            <div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                {% if producto.precio_anterior %}
+                                <span class="text-muted" style="text-decoration: line-through;">$ {{ producto.precio_anterior }} COP</span>
+                                {% endif %}
+                                <span style="font-size: 16px; font-weight: 500;">$ {{producto.precio}} COP</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <!-- Acciones del producto -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center" style="width: 100%;">
+                            {% if user.is_authenticated %}
+                                <a class="btn btn-outline-dark mt-auto" href="{% url 'carro:agregar' producto.id %}">Agregar <i class="bi bi-cart"></i></a>
+                            {% else %}
+                                <a class="btn btn-outline-dark mt-auto" href="{% url 'Usuario:login' %}" style="font-size: 15px;">Agregar <i class="bi bi-cart"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+{% block footInicio %}
+{% endblock %}
+
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

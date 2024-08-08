@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'tienda/login.css' %}">
+    <title>Iniciar sesión</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <!-- Si el usuario está autenticado, redirigir automáticamente -->
+        <script>
+            window.location.replace("{% url 'Tienda:navegar' %}");
+        </script>
+    {% else %}
+        <!-- Mostrar el formulario de inicio de sesión si no está autenticado -->
+        <aside class="cuadro">
+            <form method="post" action="{% url 'Usuario:login' %}"> 
+                <img src="{% static 'tienda/imagenes/logo.png' %}" alt="Logo" class="logo-login">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button class="ingresar" name="ingresar" type="submit">Ingresar</button>
+            </form>
+            <h1 class="o">---------- o ----------</h1>
+            <h1 class="anonim">
+                <a href="{% url 'Tienda:navegar' %}" class="anonim">Navegar sin iniciar sesión.</a>
+            </h1>
+            <h1 class="forgot_pass">
+                <a href="{% url 'Usuario:viewReco' %}" class="forgot_pass">¿Olvidaste tu contraseña?</a>
+            </h1>
+            <h1 class="create_acount">Crea tu cuenta
+                <a href="{% url 'Usuario:register' %}">aquí</a>
+            </h1>
+        </aside>
+    {% endif %}
+
+     <!-- configuracion de alerta con sweetalert2 -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+ {% if messages %}
+    {% for mensaje in messages %}
+      <script>
+        Swal.fire({
+          "title": "Felicitaciones",
+          "text": "{{mensaje}}",
+          "icon": "success"
+        })
+      </script>
+    {% endfor %}
+ {% endif %}
+</body>
+</html>

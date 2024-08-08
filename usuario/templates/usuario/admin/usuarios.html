@@ -1,0 +1,109 @@
+{% extends 'nav_foot.html' %}
+
+{% load static %}
+
+{% block title %}Usuarios{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            
+            <!-- messages -->
+            {% if messages %}
+                <div class="alert alert-dimissible fade show" role="alert">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dimissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}  
+            
+            <div class="container">
+                <!-- Botón para agregar usuario -->
+                <div class="mb-3">
+                    <!-- <a href="#" class="btn btn-success btn-sm">Agregar usuario</a> -->
+                </div>
+                <!-- Tabla de usuario -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr style="text-align: center;">
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Apellidos</th>
+                                                <th scope="col">Fecha de Nacimiento</th>
+                                                <th scope="col">Direción</th>
+                                                <th scope="col">Celular</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Estado</th>
+                                                <th scope="col">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for user in users %}
+                                                <tr style="text-align: center;" class="align-middle">
+                                                    <td>{{ user.name }}</td>
+                                                    <td>{{ user.last_name }}</td>
+                                                    <td>{{ user.birth_date }}</td>
+                                                    <td>{{ user.direction }}</td>
+                                                    <td>{{ user.cell }}</td>
+                                                    <td>{{ user.email }}</td>
+                                                    <td>{{ user.is_active }}</td>
+                                                    <td>
+                                                        <!-- Product actions-->
+                                                        <a href="{% url 'Usuario:updatedUser' user.id %}" class="btn btn-warning btn-sm mb-1">Editar</a>
+                                                        <a href="#" onclick="confirmDelete('{{ user.id }}')" class="btn btn-danger btn-sm">Eliminar</a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div> <!-- table-responsive -->
+                            </div> <!-- card-body -->
+                        </div> <!-- card -->
+                    </div> <!-- col-12 -->
+                </div> <!-- row -->
+            </div> <!-- container -->
+            
+
+        </div>   
+    </section>
+
+     <!-- configuracion de alerta con sweetalert2 -->
+
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <!-- Script para confirmación de eliminación -->
+         <script>
+         function confirmDelete(userId) {
+             Swal.fire({
+                 title: "¿Estás seguro?",
+                 text: "No podrás revertir esto.",
+                 icon: "warning",
+                 showCancelButton: true,
+                 confirmButtonColor: "#3085d6",
+                 cancelButtonColor: "#d33",
+                 confirmButtonText: "Confirmar",
+                 cancelButtonText: "Cancelar"
+             }).then((result) => {
+                 if (result.isConfirmed) {
+                     // Redirigir a la URL de eliminación
+                     window.location.href = "{% url 'Usuario:delateUser'  0 %}".replace('0', userId);
+                 }
+             });
+         }
+         </script>
+
+
+        {% block footInicio %}
+        {% endblock %}
+{% endblock %}
+
+

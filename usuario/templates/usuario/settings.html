@@ -1,0 +1,40 @@
+{% extends 'usuario/baseSettings.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main-content">
+        <div class="profile">
+
+            <h2>{{ user.get_full_name }}</h2>
+        </div>
+        <div class="info">
+            <p>Email: {{ user.email }}</p>
+            <p>Nombre de usuario: {{ user.name }}</p>
+            <p>Dirección: {{ user.direction }} </p>
+            <p>Teléfono: {{ user.cell }}</p>
+            
+            <a href="{% url 'Usuario:updatedUser' user.id %}">
+              <button style="position: relative; left: 10%;">Editar <i class="bi bi-pencil-square"></i></button>
+            </a>
+
+            <a href="{% url 'Tienda:cerrarSesion' %}">
+                <button style="position: relative; left: 115%;" ><i class="bi bi-box-arrow-in-left"></i> Cerrar sesión</button>
+            </a>
+        </div>
+
+     <!-- configuracion de alerta con sweetalert2 -->
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     {% if messages %}
+        {% for mensaje in messages %}
+          <script>
+            Swal.fire({
+              "title": "Felicitaciones",
+              "text": "{{mensaje}}",
+              "icon": "success"
+            })
+          </script>
+        {% endfor %}
+     {% endif %}
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'nav_foot.html' %}
+
+{% load static %}
+
+{% block title %}Historial de Compras{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr style="text-align: center;">
+                                            <th scope="col">Fecha de Orden</th>
+                                            <th scope="col">Información Productos</th>
+                                            <th scope="col">Precio Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if pedidos %}
+                                            {% for pedido in pedidos %}
+                                                <tr style="text-align: center;" class="align-middle">
+                                                    <td>{{ pedido.fechaOrden }}</td>
+                                                    <td>
+                                                        <ul>
+                                                            {% for producto in pedido.get_productos_info %}
+                                                                <li>Producto: {{ producto.nombreProd }} - Cantidad: {{ producto.cantidad }} - Precio: {{ producto.precio }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </td>
+                                                    <td>{{ pedido.precio_total }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="3" style="text-align: center;">No has realizado ninguna compra aún.</td>
+                                            </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div> <!-- table-responsive -->
+                        </div> <!-- card-body -->
+                    </div> <!-- card -->
+                </div> <!-- col-12 -->
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </div>
+</section>
+
+{% block footInicio %}
+{% endblock %}
+{% endblock %}

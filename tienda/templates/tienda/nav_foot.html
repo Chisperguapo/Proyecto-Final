@@ -1,0 +1,158 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'tienda' %}/assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'tienda' %}/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'tienda' %}/pagina_princi.css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %}">
+    {% block cssYjs %}
+    {% endblock %}
+    <title>{% block title %}base{% endblock %}</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'Tienda:navegar' %}">
+                <img src="{% static 'tienda' %}/imagenes/logo.png" alt="Logo" class="logo" style="width: 200px;">
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"> 
+                        <p class="nav-link mb-0" aria-current="page" style="color: #3e277e;">
+                            <i class="bi bi-person-circle"></i> {{ user.get_full_name }}
+                        </p>
+                    </li>
+                    {% if user.is_superuser %} <!-- Verificacion superuser. -->
+                        <li class="nav-item">
+                            <a class="nav-link mb-0" href="{% url 'AppAdmin:panelAdmin' %}" style="color: #3e277e;">
+                                <i class="bi bi-gear-wide-connected"></i> Panel de control
+                            </a>
+                        </li>
+                    {% endif %}
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{% url 'Usuario:login' %}" style="color: #3e277e; ">
+                            <i class="bi bi-box-arrow-in-right"></i> Iniciar sesión
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Productos:tProductos' %}" style="color: black;">
+                            <i class="bi bi-shop"></i> Productos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'Usuario:configUser' %}">
+                            <i class="bi bi-gear-wide-connected"></i> Configuración
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-raised-hand"></i> ¿Necesitas ayuda?
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'AppContacto:pqrs' %}">Enviar correo</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'Usuario:generar_pdf' %}">Descargar historial de compras</a></li>
+                            <li><a class="dropdown-item" href="{% url 'Tienda:historialCompra' %}">Mostrar historial</a></li>
+                        </ul>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form class="d-flex">
+                            <button class="btn btn-outline-dark" type="submit" formaction="{% url 'carro:tCarro' %}">
+                                <i class="bi bi-cart-fill me-1"></i>
+                                Cart
+                                <span class="badge bg-dark text-white ms-1 rounded-pill">
+                                    {% if request.session.carro %}
+                                        {{ importe_cantidad }}
+                                    {% else %}
+                                        0
+                                    {% endif %}
+                                </span>
+                            </button>
+                        </form>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    {% block header %}
+    <header class="py-5" style="background: #3e277e;">
+        <div class="container p;">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder" style="font-family: Georgia, 'Times New Roman', Times, serif;">Bienvenido</h1>
+                <p class="lead fw-normal text-white-50 mb-0" style="font-family: Georgia, 'Times New Roman', Times, serif; color: rgb(0, 0, 0);">Tu mercado a la mano</p>
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+    
+    {% block content %}
+    {% endblock %}
+
+    {% block footUser %}
+    <footer class="py-5" style="background: #3e277e;">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2024</p></div>
+    </footer>
+    {% endblock %}
+
+    {% block footInicio %}
+    <!-- Footer-->
+    <footer class="py-5" style="background: linear-gradient(to bottom, #3e277e, #aa8cd5);">
+            <div class="container">
+              <p class="m-0">
+                  <a href="#" class="link">
+                    <span class="fa-stack fa-lg">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                  <a href="#" class="link">
+                    <span class="fa-stack fa-lg">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+                  <a href="#" class="link">
+                    <span class="fa-stack fa-lg">
+                      <i class="fa fa-circle fa-stack-2x"></i>
+                      <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                    </span>
+                  </a>
+              </p>
+              <p class="m-0 mbt" style="text-align: center;">
+                  <a href="sample.html" class="link" style="margin: 25px;text-decoration: none; color: white;"><i class="bi bi-facebook" style="font-size: 20x;color: blue ;" ></i>   Visitanos en Facebook</a>
+                  <a href="sample.html" class="link" style="margin: 25px;text-decoration: none; color: white;"><i class="bi bi-instagram" style="font-size: 20px; background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>Instagram</a>
+                  <a href="sample.html" class="link" style="margin: 25px;text-decoration: none; color: white;"><i class="bi bi-whatsapp" style="font-size: 20px; color: green;"></i>WhatsApp</a>
+                  </p><br>
+              <p class="m-0 mbt1" style="text-align: center;">&copy; Gestión de Pedidos 2024</p>
+            </div>
+    </footer>
+    {% endblock %}
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="{% static 'tienda' %}/js/scripts.js"></script>
+
+
+
+   
+</body>
+</html>

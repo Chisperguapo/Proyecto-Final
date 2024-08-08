@@ -1,0 +1,91 @@
+{% extends 'nav_foot.html' %}
+
+{% load static %}
+
+{% block title %}Marcas{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            
+            <!-- messages -->
+            {% if messages %}
+                <div class="alert alert-dimissible fade show" role="alert">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dimissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <a href="{% url 'Productos:prodsAdmin' %}" class="btn btn-purple">Productos</a>
+            <a href="{% url 'Productos:categorias' %}" class="btn btn-purple">Categorías</a> <br> <br>
+            
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <table class="table table-striped">
+                            <thead style="text-align: center;">
+                                <a href="{% url 'Productos:addMarca' %}" class="btn btn-purple btn-sm">Agregar marca</a>
+                                <tr>
+                                    <th scope="col">Marcas</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            {% for marc in marcas %}
+                                <tbody style="text-align: center;">
+                                    <tr>
+                                        <td>{{marc.marca}}</td>
+                                        <td>
+                                            <!-- Product actions-->
+                                            <a href="{% url 'Productos:updatedMarca' marc.id %}" class="btn btn-warning btn-sm">Editar</a>
+                                            <a href="#" onclick="confirmDelete('{{ marc.id }}')" class="btn btn-danger btn-sm">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>   
+            </div>   
+
+        </div>   
+    </section>
+    
+    <style>
+        .btn-purple {
+      background-color: #4E319B;
+      color: white;
+    }
+    </style>
+
+<!-- configuracion de alerta con sweetalert2 -->
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Script para confirmación de eliminación -->
+    <script>
+    function confirmDelete(marcaId) {
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "No podrás revertir esto.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Redirigir a la URL de eliminación
+                window.location.href = "{% url 'Productos:delateMarca'  0 %}".replace('0', marcaId);
+            }
+        });
+    }
+    </script>
+{% endblock %}
+
+

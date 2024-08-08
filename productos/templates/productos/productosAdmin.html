@@ -1,0 +1,137 @@
+{% extends 'nav_foot.html' %}
+
+{% load static %}
+
+{% block title %}Productos{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            
+            <!-- messages -->
+            {% if messages %}
+                <div class="alert alert-dimissible fade show" role="alert">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dimissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <style>
+                .btn-purple {
+                background-color: #4E319B;
+                color: white;
+            }
+            </style>
+
+            <!-- Search form -->
+            <form method="GET" action="">
+                <div class="input-group mb-4">
+                    <input type="text" class="form-control" placeholder="Buscar productos" name="query" value="{{ query }}">
+                    <button class="btn btn-outline-dark" type="submit">Buscar</button>
+                </div>
+            </form>
+            <a href="{% url 'Productos:categorias' %}" class="btn btn-purple">Categorías</a>
+            <a href="{% url 'Productos:marcas' %}" class="btn btn-purple">Marcas</a> <br><br>
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            </div>   
+            
+            <div class="container">
+                <!-- Botón para agregar producto -->
+                <div class="mb-3">
+                    <a href="{% url 'Productos:add' %}" class="btn btn-purple btn-sm">Agregar Producto</a>
+                </div>
+                <!-- Tabla de productos -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr style="text-align: center;">
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Marca</th>
+                                                <th scope="col">Categoría</th>
+                                                <th scope="col">Precio</th>
+                                                <th scope="col">Stock</th>
+                                                <th scope="col">Descripción</th>
+                                                <th scope="col">Fecha vencimiento</th>
+                                                <th scope="col">Imagen</th>
+                                                <th scope="col">Acción</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for prod in productos %}
+                                                <tr style="text-align: center;" class="align-middle">
+                                                    <td>{{ prod.nombre }}</td>
+                                                    <td>{{ prod.marca }}</td>
+                                                    <td>{{ prod.categoria }}</td>
+                                                    <td>{{ prod.precio }}</td>
+                                                    <td>{{ prod.stock }}</td>
+                                                    <td>{{ prod.descripcion }}</td>
+                                                    <td>{{ prod.fecha_vencimiento }}</td>
+                                                    <td>
+                                                        {% if prod.imagen %}
+                                                            <img src="{{ prod.imagen.url }}" alt="{{ prod.nombre }}" style="max-width: 100px; max-height: 100px;"/>
+                                                        {% else %}
+                                                            <img src="{% static 'productos/default.jpeg' %}" alt="Default image" style="max-width: 100px; max-height: 100px;"/>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <!-- Product actions-->
+                                                        <a href="{% url 'Productos:updatedProd' prod.id %}" class="btn btn-warning btn-sm mb-1">Editar</a>
+                                                        <a href="#" onclick="confirmDelete('{{ prod.id }}')" class="btn btn-danger btn-sm">Eliminar</a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div> <!-- table-responsive -->
+                            </div> <!-- card-body -->
+                        </div> <!-- card -->
+                    </div> <!-- col-12 -->
+                </div> <!-- row -->
+            </div> <!-- container -->
+            
+
+        </div>   
+    </section>
+
+    
+     <!-- configuracion de alerta con sweetalert2 -->
+
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     <!-- Script para confirmación de eliminación -->
+         <script>
+         function confirmDelete(prodId) {
+             Swal.fire({
+                 title: "¿Estás seguro?",
+                 text: "No podrás revertir esto.",
+                 icon: "warning",
+                 showCancelButton: true,
+                 confirmButtonColor: "#3085d6",
+                 cancelButtonColor: "#d33",
+                 confirmButtonText: "Confirmar",
+                 cancelButtonText: "Cancelar"
+             }).then((result) => {
+                 if (result.isConfirmed) {
+                     // Redirigir a la URL de eliminación
+                     window.location.href = "{% url 'Productos:delateProd'  0 %}".replace('0', prodId);
+                 }
+             });
+         }
+         </script>
+
+{% block footInicio %}
+{% endblock %}
+
+{% endblock %}
+
+

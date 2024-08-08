@@ -1,0 +1,26 @@
+{% extends 'nav_foot.html' %}
+{% load static %}
+
+{% block title %}Agregar productos{% endblock %}
+
+{% block cssYjs %}
+<link rel="stylesheet" href="{% static 'productos/estilo_prod.css' %}">
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div class="formu">
+<h1>Editar Producto</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if form.instance.imagen %}
+            <p>Imagen actual: <img src="{{ form.instance.imagen.url }}" alt="" width="150" height="150"></p>
+        {% endif %}
+        <br>
+        <button type="submit">Actualizar</button>
+    </form>
+</div>
+{% endblock %}

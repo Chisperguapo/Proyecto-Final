@@ -1,0 +1,146 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.cuadro {
+    border: solid 2px blueviolet;
+    border-radius: 14px;
+    width: 90%;
+    max-width: 373px;
+    padding: 20px;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.logo-login {
+    width: 8rem;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.usuario,
+.password {
+    border: solid 1.9px blueviolet;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 258px;
+    height: 36px;
+    font-size: 20px;
+    text-align: center;
+    color: gray;
+    margin-top: 20px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.usuario:focus, .password:focus {
+    border-color: rgb(98, 43, 226);
+    border-width: 2.7px;
+    outline: none;
+    color: blueviolet;
+}
+
+.usuario:not(:placeholder-shown), .password:not(:placeholder-shown) {
+    border-width: 2.3px;
+}
+
+.usuario:hover, .password:hover {
+    border: solid transparent;
+    border-width: 3px;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0px 0px 10px blueviolet;
+}
+
+.usuario:active, .password:active {
+    transform: scale(1.01);
+}
+
+.ingresar {
+    border: solid 1.9px black;
+    border-radius: 10px;
+    background: blueviolet;
+    width: 100%;
+    max-width: 258px;
+    height: 36px;
+    font-size: 20px;
+    text-align: center;
+    color: #fff;
+    margin-top: 20px;
+    box-sizing: border-box;
+}
+
+.ingresar:hover {
+    border: 0 transparent;
+    border-width: 2px;
+    color: rgb(182, 127, 233);
+    border-color: rgb(44, 15, 71);
+    transform: scale(1.05);
+}
+
+.ingresar:active {
+    transform: scale(1.09);
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0px 0px 10px blueviolet;
+    color: white;
+}
+
+.o {
+    color: blueviolet;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.anonim, .forgot_pass, .create_acount {
+    color: blueviolet;
+    font-size: 18px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.anonim:hover, .forgot_pass:hover, .create_acount a:hover {
+    transform: scale(1.02);
+    color: black;
+}
+
+.anonim:active, .forgot_pass:active, .create_acount a:active {
+    transform: scale(1.05);
+}
+
+.create_acount {
+    margin-top: 40px;
+    font-size: 17px;
+    color: rgb(32, 31, 31);
+}
+
+.create_acount a {
+    color: rgb(144, 43, 226);
+}
+
+.create_acount a:hover {
+    transform: scale(1.05);
+    color: rgb(144, 43, 226);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .cuadro {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .logo-login {
+        width: 6rem;
+        margin-bottom: 15px;
+    }
+
+    .ingresar, .usuario, .password {
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'tienda' %}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'tienda' %}/registro.css">
+    <script src="{% static 'bootstrap.esm.min.js' %}"></script>
+    <title>Registro</title>
+</head>
+
+<body>
+    <aside class="cuad_register">
+        <main class="form_register">
+            <!-- {% if messages %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %} -->
+            <form method="post" action="{% url 'Usuario:register' %}">{% csrf_token %}
+                <img src="{% static 'tienda' %}/imagenes/logo.png" alt="" class="logo-register">
+                <div class="fields">
+                    {% for field in form %}
+                        {{ field }}
+                    {% endfor %}
+                </div>
+                <button class="but_next" type="submit">Registrar</button>
+            </form>
+        </main>
+        <div class="separator">--------- o ---------</div>
+        <footer>
+            <div class="text_login">
+                ¿Ya tienes una cuenta? 
+                <a class="page_login" href="{% url 'Usuario:login' %}">Ingresa aquí.</a>
+            </div>
+        </footer>
+    </aside>    
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuraciones del Usuario</title>
+    <link rel="stylesheet" href="{% static '/css/usuario' %}/setting.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <script src="{% static '/js/usuario' %}/setting.js"></script>
+</head>
+{% if user.is_authenticated %}
+<body>
+    <div class="sidebar">
+        <h1>Menú</h1>
+        <a href="{% url 'Tienda:navegar' %}" class="sidebar-button"><i class="fas fa-home"></i>Inicio</a>
+        <a href="{% url 'Usuario:configUser' %}" class="sidebar-button"><i class="fas fa-cogs" ></i>Configuración</a>
+        <a href="{% url 'Usuario:security' %}" class="sidebar-button"><i class="fas fa-shield-alt"></i>Seguridad</a>
+        <a href="#" class="sidebar-button"><i class="fas fa-tags"></i>Cupones</a>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+{% else %}
+<h1>Necesita iniciar sesion</h1>
+{% endif %}
+</html>

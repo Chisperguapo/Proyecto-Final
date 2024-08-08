@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito de Compra</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .btn-purple {
+      background-color: #4E319B;
+      color: white;
+    }
+    .carrito-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .carrito-table {
+      border: solid #868585 1.5px;
+      width: 60%;
+      margin-right: 20px;
+    }
+    .carrito-table th, .carrito-table td {
+      border: solid #868585 1.5px;
+      text-align: center;
+      padding: 8px;
+    }
+    .carrito-table th {
+      background-color: #f2f2f2;
+    }
+    .pagos {
+      border: solid #868585 1.5px;
+      width: 20%;
+      align-self: flex-start;
+    }
+    .pagos th, .pagos td {
+      border: solid #868585 1.5px;
+      text-align: left;
+      padding: 8px;
+    }
+    .pagos th {
+      background-color: #f2f2f2;
+    }
+    .total-row {
+      font-weight: bold;
+    }
+    .buy-button {
+      text-align: center;
+    }
+    .buy-button button {
+      padding: 10px 20px;
+      background-color: #4E319B;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-top: 10px; /* Espacio superior entre la tabla y el botón */
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  {% if request.session.carro %}
+    <div class="carrito-container">
+      <table class="carrito-table">
+        <thead>
+          <tr>
+            <th colspan="8" class="text-center">Carrito de compra</th>
+          </tr>
+          <tr>
+            <th>Imagen</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Precio Total</th>
+            <th>Agregar o quitar cantidad</th>
+          </tr>
+        </thead>
+        {% for key, value in request.session.carro.items %}
+        <tbody>
+          <tr class="text-center">
+            <td><img src="{{ MEDIA_URL }}{{ value.imagen }}" alt="{{ value.producto }}" style="max-width: 100px;"></td>
+            <td>{{ value.producto }}</td>
+            <td>{{ value.cantidad }}</td>
+            <td>$ {{ value.precio_unitario }} COP</td>
+            <td>{{ value.precio_total }} COP</td>
+            <td>
+              <a href="{% url 'carro:sumar' key %}" class="btn btn-purple"> + </a>
+              <a href="{% url 'carro:restar' key %}" class="btn btn-purple"> - </a>
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+      </table>
+      
+      <table class="pagos">
+        <thead>
+          <tr>
+            <th colspan="2">El precio total de sus productos es:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="total-row">
+            <td colspan="2">$ {{ importe_total_carro }}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+          </tr>
+          <tr>
+            <td colspan="2" class="buy-button">
+              <a href="{% url 'pasarela:checkout' %}"><button style="position: relative; right: -15px ; ">PayPal</button></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="{% url 'carro:pago' %}"><button>Nequi</button></a>
+            </td>
+            
+              
+            
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  {% else %}
+    <div class="alert alert-danger text-center">Sin productos <br>
+      <a href="{% url 'Productos:tProductos' %}">Ver productos</a>
+    </div>
+  {% endif %}
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

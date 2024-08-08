@@ -1,0 +1,87 @@
+.cuadro{
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+/* Estilos para las etiquetas de los labels */
+form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Estilos para los inputs */
+.boton{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Para que el padding y border se incluyan en el tamaño total */
+}
+
+/* Estilos específicos para el botón */
+.boton{
+    background-color: #3e277e;
+    color: white;
+    cursor: pointer;
+}
+
+/* Estilos para la tabla de resultados */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para el párrafo de mensaje cuando no hay resultados */
+.no-result {
+    color: #999;
+    font-style: italic;
+}
+
+/* Estilos para el gráfico */
+.grafico {
+    margin-top: 20px;
+    max-width: 100%;
+}
+label{
+    font-weight: 600;
+}
+h1{
+    text-align: center;
+    font-weight: normal;
+}
+.name{
+    width:100%;
+    height: 37px;
+    border-radius: 4px;
+}
+.direction{
+    width:100%;
+    height: 37px;
+    border-radius: 4px;
+}
+.cell{
+    width:100%;
+    height: 37px;
+    border-radius: 4px;
+}
+.e-mail{
+    width:100%;
+    height: 37px;
+    border-radius: 4px;
+}

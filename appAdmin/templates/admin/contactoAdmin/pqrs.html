@@ -1,0 +1,50 @@
+{% extends 'nav_foot.html' %}
+{% load static %}
+
+{% block title %}Gestión de contactos{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+
+    <!-- Tabla para contactos -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr style="text-align: center;">
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Email</th>
+                                   <th scope="col">Mensaje</th>
+                                    <th scope="col">Tipo de contacto</th>
+                                    <th scope="col">Recibir respuesta al correo</th>
+                                    <th scope="col">Fecha de envio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for pq in pqrs %}
+                                    <tr style="text-align: center;" class="align-middle">
+                                        <td>{{ pq.nombre }}</td>
+                                        <td>{{ pq.email }}</td>
+                                        <td>{{ pq.mensaje }}</td>
+                                        <td>{{ pq.get_tipo_contacto_display }}</td>
+                                        <td>{{ pq.notificacion }}</td>
+                                        <td>{{ pq.fecha_envio }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div> <!-- table-responsive -->
+                </div> <!-- card-body -->
+            </div> <!-- card -->
+        </div> <!-- col-12 -->
+    </div> <!-- row -->
+
+    {% block footInicio %}
+    {% endblock %}
+
+{% endblock %}

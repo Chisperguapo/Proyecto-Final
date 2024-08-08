@@ -1,0 +1,82 @@
+{% extends 'nav_foot.html' %}
+{% load static %}
+
+{% block title %}Panel admin{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-envelope-at-fill" style="font-size: 5rem;"></i>
+                        <h5 class="card-title">Contactos usuarios</h5>
+                        <p class="card-text">Gestión de contactos.</p>
+                        <a href="{% url 'Reportes:reportePorContacto' %}">Acceder</a>
+                    </div> <!-- Cierre div card-body text-center -->
+                </div> <!-- Cierre div card -->
+            </div> <!-- Cierre div col-md-4 -->
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-people" style="font-size: 5rem;"></i>
+                        <h5 class="card-title">Usuarios</h5>
+                        <p class="card-text">Gestión de usuarios.</p>
+                        <p style="font-weight: 600;">Cantidad de usuarios: 
+                            <br>
+                            <strong style="font-size: 20px; color: green;">{{ usuarios|length }}</strong>
+                        </p>
+                        <a href="{% url 'Usuario:usuarios' %}">Acceder</a>
+                    </div> <!-- Cierre div card-body text-center -->
+                </div> <!-- Cierre div card -->
+            </div> <!-- Cierre div col-md-4 -->
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-shop-window" style="font-size: 5rem;"></i>
+                        <h5 class="card-title">Productos</h5>
+                        <p class="card-text">Gestión de productos.</p>
+                        <p style="font-weight: 600; ">Cantidad total de productos: 
+                            <br>
+                            <strong style="font-size: 20px;color: green;">{{ productos|length }}</strong>
+                        </p>
+                        <a href="{% url 'Productos:prodsAdmin' %}">Acceder</a>
+                    </div> <!-- Cierre div card-body text-center -->
+                </div> <!-- Cierre div card -->
+            </div> <!-- Cierre div col-md-4 -->
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-file-earmark-bar-graph-fill" style="font-size: 5rem;"></i>
+                        <h5 class="card-title">Reportes</h5>
+                        <p class="card-text">Gestión de reportes.</p>
+                        <a href="{% url 'AppAdmin:reportes' %}">Acceder</a>
+                    </div> <!-- Cierre div card-body text-center -->
+                </div> <!-- Cierre div card -->
+            </div> <!-- Cierre div col-md-4 -->
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-minecart-loaded" style="font-size: 5rem;"></i>
+                        <h5 class="card-title">Pedidos</h5>
+                        <p class="card-text">Gestión de pedidos.</p>
+                        <a href="{% url 'AppAdmin:pedidos' %}">Acceder</a>
+                    </div> <!-- Cierre div card-body text-center -->
+                </div> <!-- Cierre div card -->
+            </div> <!-- Cierre div col-md-4 -->
+
+        </div> <!-- Cierre div row -->
+    </div> <!-- Cierre div container mt-5 -->
+
+    <br>
+
+    {% block footInicio %}
+    {% endblock %}
+{% endblock %}

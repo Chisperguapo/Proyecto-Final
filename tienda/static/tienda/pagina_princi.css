@@ -1,0 +1,26 @@
+
+
+.nav-link{
+    color: black;
+    font-size: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+
+.nav-link:hover{
+    color: #4E319B;
+}
+
+
+
+.navbar .nav-link .username {
+    max-width: 150px; /* Ajusta el ancho máximo según tu diseño */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+footer{
+    background: #4E319B;
+}

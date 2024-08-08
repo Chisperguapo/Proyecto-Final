@@ -1,0 +1,82 @@
+{% extends 'nav_foot.html' %}
+{% load static %}
+
+{% block title %}Reporte bajo stock{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block content %}
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 mt-5">
+            
+            <!-- messages -->
+            {% if messages %}
+                <div class="alert alert-dimissible fade show" role="alert">
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dimissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <h1>Reporte de productos con bajo stock</h1>
+            
+            <!-- Formulario para establecer el valor de bajoStock -->
+             <form method="GET" action="">
+                <div class="input-gruop md-4">
+                    <label for="bajoStock" class="form-label">Nivel de stock bajo:</label>
+                    <input type="number" class="form-control" id="bajoStock" name="bajoStock" value="{{ bajoStock|default:10 }}">
+                    <button class="btn btn-outline-dark" type="submit">Actualizar</button>
+                </div>
+             </form>
+
+
+            <div class="container">
+                <!-- Tabla de productos con bajo stock -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr style="text-align: center;">
+                                                <th scope="col">Nombre</th>
+                                                <th scope="col">Marca</th>
+                                                <th scope="col">Categoría</th>
+                                                <th scope="col">Stock</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if productosStockBajo %}
+                                                {% for producto in productosStockBajo %}
+                                                    <tr style="text-align: center;" class="align-middle">
+                                                        <td>{{ producto.nombre }}</td>
+                                                        <td>{{ producto.marca }}</td>
+                                                        <td>{{ producto.categoria }}</td>
+                                                        <td>{{ producto.stock }}</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            {% else %}
+                                                <tr>
+                                                    <td colspan="4" style="text-align: center;">No hay productos con bajo stock.</td>
+                                                </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div> <!-- table-responsive -->
+                            </div> <!-- card-body -->
+                        </div> <!-- card -->
+                    </div> <!-- col-12 -->
+                </div> <!-- row -->
+            </div> <!-- container -->
+            
+
+        </div>   
+    </section>
+
+    {% block footInicio %}
+    {% endblock %}
+{% endblock %}

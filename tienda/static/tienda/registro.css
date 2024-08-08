@@ -1,0 +1,282 @@
+body {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    background-color: #f8f9fa;
+}
+
+.cuad_register {
+    text-align: center;
+    border: 2px solid blueviolet;
+    border-radius: 20px;
+    width: 70%;
+    max-width: 373px;
+    padding: 20px;
+    background: whitesmoke;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    height: 500px;
+    margin: auto;
+}
+
+.logo-register {
+    width: 8rem;
+    margin-bottom: 20px;
+    width: 200px;
+    height: 110px;
+    position: relative;
+    top: -20px;
+}
+
+.form_register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fields {
+    margin-bottom: 15px;
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
+.fields .apellidos{
+    position: relative;
+    top: 23px;
+    left: 190px;
+    width: calc(45% - 8px);
+    padding: 10px;
+    border: 2px solid #8a2be2;
+    border-radius: 20px;
+    text-align: center;
+    color: grey;
+    outline: none;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+}
+.fields .name{
+    position: relative;
+    top: 76px;
+    left: -5px;
+    width: calc(45% - 8px);
+    padding: 10px;
+    border: 2px solid #8a2be2;
+    border-radius: 20px;
+    text-align: center;
+    color: grey;
+    outline: none;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+}
+.fields .direction{
+    position: relative;
+    top: 76px;
+    left: -5px;
+    width: calc(45% - 8px);
+    padding: 10px;
+    border: 2px solid #8a2be2;
+    border-radius: 20px;
+    text-align: center;
+    color: grey;
+    outline: none;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+
+
+
+
+
+}
+.fields .cell{
+    position: relative;
+    top: 23px;
+    left: 190px;
+    width: calc(45% - 8px);
+    padding: 10px;
+    border: 2px solid #8a2be2;
+    border-radius: 20px;
+    text-align: center;
+    color: grey;
+    outline: none;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+}
+.fields .e-mail{
+    position: relative;
+    top: 20px;
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 2px solid #8a2be2;
+    border-radius: 20px;
+    text-align: center;
+    color: grey;
+    outline: none;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+}
+
+.fields .password{
+    position: relative;
+    top: 20px;
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 2px solid #8a2be2;
+    border-radius: 20px;
+    text-align: center;
+    color: grey;
+    outline: none;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+}
+.fields .password2 {
+    position: relative;
+    top: 20px;
+    width: calc(100% - 10px);
+    padding: 10px;
+    border: 2px solid #8a2be2;
+    border-radius: 20px;
+    text-align: center;
+    color: grey;
+    outline: none;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+}
+.fields .fechaNaci{
+    position: relative;
+    top: 45px;
+    width: calc(100% - 10px);
+    padding: 15px;
+    border: 2px solid #8a2be2;
+    border-radius: 20px;
+    text-align: center;
+    color: grey;
+    outline: none;
+    transition: all 0.3s;
+    margin-bottom: 15px;
+}
+
+.fields .name{
+    position: relative;
+    top: -30px;
+    height: 10px;
+}
+.fields .apellidos{
+    position: relative;
+    top: -30px;
+    left: 5px;
+    height: 10px;
+}
+.fields .direction{
+    position: relative;
+    top: -28px;
+    height: 10px;
+}
+.fields .fechaNaci{
+    position: relative;
+    top: -30px;
+    height: 5px;
+    width: 70%;
+    left: 35px;
+}
+.fields .cell{
+    position: relative;
+    top: -28px;
+    left: 5px;
+    height: 10px;
+}
+.fields .e-mail{
+    position: relative;
+    top: -28px;
+    height: 10px;
+}
+.fields .password{
+    position: relative;
+    top: -28px;
+    height: 10px;
+}
+.fields .password2{
+    height: 10px;
+    position: relative;
+    top: -28px;
+}
+
+.fields input:focus {
+    border-color: rgb(144, 43, 226);
+    color: rgb(144, 43, 226);
+}
+
+.fields input:not(:placeholder-shown) {
+    color: black;
+}
+
+.fields input:hover {
+    box-shadow: 0px 0px 10px blueviolet;
+}
+
+.fields input:active {
+    transform: scale(1.01);
+}
+
+.but_next {
+    color: white;
+    width: 70%;
+    padding: 10px;
+    border: 2px solid blueviolet;
+    border-radius: 30px;
+    background: linear-gradient(45deg, blueviolet, darkviolet);
+    outline: none;
+    margin-top: 20px;
+    transition: all 0.3s;
+    position: relative;
+    top: -55px;
+}
+
+.but_next:hover {
+    background: linear-gradient(45deg, darkviolet, blueviolet);
+    box-shadow: 0px 0px 10px blueviolet;
+}
+
+.separator {
+    font-size: 20px;
+    color: blueviolet;
+    margin-top: 20px;
+    position: relative;
+    top: -65px;
+}
+
+.text_login {
+    margin-top: -60px;
+}
+
+.page_login {
+    color: blueviolet;
+    font-weight: bold;
+}
+
+.page_login:hover {
+    color: rgb(101, 28, 161);
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .cuad_register {
+        width: 90%;
+        padding: 20px;
+    }
+    .logo-register {
+        width: 6rem;
+    }
+    .fields input {
+        width: calc(100% - 20px);
+        padding: 8px;
+        margin-right: 0;
+    }
+}
+
+
+

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout page</title>
+</head>
+<body>
+    <h1>Checkout</h1>
+    <div class="product-container">
+        <div class="products">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for key,value in request.session.carro.items %}
+                        <tr>
+                            <td>{{value.producto}}</td>
+                            <td>{{value.cantidad}}</td>
+                            <td>{{value.precio}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">Total</td>
+                        <td>${{total}}</td>
+                    </tr>
+                </tfoot>
+            </table>
+            {{ paypal.render }}
+        </div>
+    </div>
+
+
+</body>
+</html>

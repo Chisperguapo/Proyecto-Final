@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago</title>
+    <link rel="stylesheet" href="{% static 'carro' %}/imagenes/MicodigoQR.jpeg">
+    <style>
+        body{
+            background: rgb(243, 243, 243);
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 50px;
+        }
+        .tabla {
+            width: 300px;
+            margin-right: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .tabla td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .tabla .header {
+            font-weight: bold;
+            text-align: center;
+        }
+        .tabla img {
+            max-width: 100%;
+            height: 450px;
+            display: block;
+            margin: 0 auto;
+        }
+        .video-container {
+            max-width: 560px;
+        }
+        .video-container iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table class="tabla">
+            <tr>
+                <td colspan="2" class="header">Pago</td>
+            </tr>
+            <tr>
+                <td>Su monto a pagar es:</td>
+                <td>{{ importe_total_carro }}</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img src="{% static 'carro/imagenes/MicodigoQR.jpeg' %}" alt="Código QR">
+                </td>
+            </tr>
+        </table>
+        <table class="tabla">
+            <tr>
+                <td colspan="2" class="header">Instrucciones de como realizar su pago</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/yXl4caPNdrM?si=0JcgunFnufvMotQ-" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="header" style="font-weight: normal;">Luego de que haya hecho el pago con éxito. Favor tomar una captura de pantalla y enviarla al siguiente número de WhatsApp: 312816570 :]</td>
+            </tr>
+
+        </table>
+        
+    </div>
+</body>
+</html>

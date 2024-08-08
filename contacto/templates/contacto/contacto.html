@@ -1,0 +1,50 @@
+{% extends 'nav_foot.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block cssYjs %}
+<link rel="stylesheet" href="{% static 'contacto' %}/contacto.css">
+{% endblock %}
+
+{% block title %}Contacto{% endblock %}
+
+{% block header %}
+    <!-- En caso de que sea 'ok' el request.Get, se mostrará una alerta de información correcta -->
+    {% if 'ok' in request.GET %}
+        <div class="alert alert-succes mt-5" role="alert" style="text-align: center;">
+            <strong>El mensaje se ha enviado correctamente.</strong>
+        </div>
+    {% endif %}
+
+    <!-- En caso contrario mostrara una alerta de información incorrecta. -->
+    {% if 'error' in request.GET %}
+        <div class="alert alert-danger mt-5" role="alert"style="text-align: center;">
+            <strong>El mensaje no ha podido ser enviado. Por favor intente más tarde</strong>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h3 class="text-center" >Formulario de contacto.</h3>
+
+    <p style="text-align: center; ">
+        ¡Es un placer que puedas contactarnos!. Dejanos tu inquietud y nos pondremos en contacto contigo en el menor tiempo posible.
+    </p>
+    <div class="row" >
+        <div class="col-md-6">
+            <form action="" method="POST" class="Form" > <!-- Indicamos que el formulario va ser tipo post -->
+                {% csrf_token %} <!-- Indicamos el csrf para válidar. -->
+                {{ formulario|crispy }} <!-- Importamos formulario de tipo crispy -->
+
+                <input class="btn btn-primary" type="submit" value="Enviar mensaje" style="background-color: #4E319B; border: #4E319B;"> <!-- Se crea el boton tipo submit para la comprobación de la información -->
+                {% if 'ok' in request.GET %} disable {% endif %} <!-- Validación en caso de que se envíe correctamente -->
+                {% if 'error' in request.GET %} disable {% endif %} <!-- Validación en caso que se genere un error -->
+            </form>
+
+            
+        </div>
+    </div>
+
+    {% block footInicio %}
+    {% endblock %}
+{% endblock %}

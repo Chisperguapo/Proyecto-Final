@@ -1,0 +1,22 @@
+{% extends 'nav_foot.html' %}
+{% load static %}
+
+{% block title %}Agregar productos{% endblock %}
+
+{% block cssYjs %}
+<link rel="stylesheet" href="{% static 'productos/estilo_prod.css' %}">
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div class="formu">
+    <h1>Agregar Producto</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar</button>
+    </form>
+</div>
+{% endblock %}

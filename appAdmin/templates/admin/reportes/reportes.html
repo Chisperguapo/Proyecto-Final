@@ -1,0 +1,38 @@
+{% extends 'nav_foot.html' %}
+{% load static %}
+
+{% block title %}Reportes{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-body-text" style="font-size: 5rem;"></i>
+                        <h5 class="card-title">Reporte Contactos</h5>
+                        <p class="card-text">Por fechas.</p>
+                        <a href="{% url 'AppAdmin:pqrsAdmin' %}">Acceder</a>
+                    </div> <!-- Cierre div card-body text-center -->
+                </div> <!-- Cierre div card -->
+            </div> <!-- Cierre div col-md-4 -->
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-clipboard-pulse" style="font-size: 5rem;"></i>
+                        <h5 class="card-title">Reporte Productos</h5>
+                        <p class="card-text">Bajo stock.</p>
+                        <a href="{% url 'Reportes:bajoStock' %}">Acceder</a>
+                    </div> <!-- Cierre div card-body text-center -->
+                </div> <!-- Cierre div card -->
+            </div> <!-- Cierre div col-md-4 -->
+        </div> <!-- Cierre div row -->
+    </div> <!-- Cierre div container mt-5 -->
+    <br>
+    {% block footInicio %}
+    {% endblock %}
+{% endblock %}
